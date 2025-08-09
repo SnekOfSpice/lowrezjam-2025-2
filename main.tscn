@@ -1,17 +1,33 @@
 [gd_scene load_steps=2 format=3 uid="uid://cc35ked1dq50k"]
 
-[ext_resource type="Texture2D" uid="uid://drjfd1navkl50" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="LevelContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
 custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Notification" type="RichTextLabel" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_left = -0.5
+offset_right = -0.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ig7tw")
-expand_mode = 2
+bbcode_enabled = true
+text = "MOUSE 2 CROSS"
+fit_content = true
