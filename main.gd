@@ -24,7 +24,7 @@ var time_taken := []
 func _ready() -> void:
 	%Notification.visible_characters = 0
 	
-	notify(["welcome", "lets play a game"], 2, place_level.bind(0))
+	notify(["welcome", "trace the line to win"], 2, place_level.bind(0))
 
 func place_level(number:int):
 	if number >= LEVELS.size():
@@ -58,6 +58,13 @@ func place_level(number:int):
 	level_started = false
 	#print(goal_pixels)
 
+var level_time := 0.0
+func _process(delta: float) -> void:
+	if level_started:
+		level_time += delta
+		
+		
+	
 func on_stencil_pixel_entered(coord:Vector2i):
 	if is_notifying:
 		return
@@ -79,13 +86,15 @@ func place_pixel_at(coord:Vector2i):
 	%Paint.add_child(pixel)
 	pixel.position = coord# + Vector2i(31,31)
 	
+	Sound.play_sfx("click")
+	
 	if pixel_tracker.is_empty():
 		finish_level()
 
 func finish_level():
 	level_started = false
 	get_current_stencil().set_physics_process(false)
-	print("you win")
+	Sound.play_sfx("horn")
 	
 	# calculate results
 	var missed_pixels := []
@@ -107,6 +116,7 @@ func finish_level():
 	
 	var accuracy := clampf(base - (missed * 0.5) - (overdraw * 0.5), 0, 1)
 	accuracies.append(accuracies)
+	time_taken.append(level_time)
 	
 	for marker : Node2D in %MarkerOverlay.get_children():
 		marker.queue_free()
@@ -114,7 +124,8 @@ func finish_level():
 	notify([
 		"Accuracy",
 		str(int(accuracy * 100)),
-		"Time"
+		"Time",
+		"%0.2f s" % level_time
 	], 1, start_next_level)
 
 func start_next_level():
@@ -137,6 +148,7 @@ func on_stencil_start_level():
 			finish_level()
 		return
 	level_started = true
+	Sound.play_sfx("start")
 	get_current_stencil().visited_pixels.clear()
 	place_pixel_at(get_current_stencil().get_start_coord())
 	

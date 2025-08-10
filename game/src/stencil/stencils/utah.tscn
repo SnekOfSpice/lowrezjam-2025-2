@@ -40,4 +40,4 @@ script = ExtResource("2_fiiac")
 position = Vector2(13, 11)
 sprite_frames = SubResource("SpriteFrames_0eh1b")
 autoplay = "default"
-frame_progress = 0.492121
+frame_progress = 0.639501

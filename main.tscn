@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc35ked1dq50k"]
+[gd_scene load_steps=6 format=3 uid="uid://cc35ked1dq50k"]
 
 [ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://hipo1eavkdlk" path="res://game/images/backgrounds/utah.png" id="2_1bvp3"]
 [ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="2_h2yge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
@@ -12,9 +13,9 @@ shader_parameter/angle = 0.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
-skip_notifications = true
 
 [node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_1bvp3")
 centered = false
 
 [node name="LevelContainer" type="Node2D" parent="."]
@@ -59,3 +60,9 @@ grow_vertical = 2
 bbcode_enabled = true
 text = "MOUSE 2 CROSS"
 fit_content = true
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/Control"]
+visible = false
+offset_right = 69.0
+offset_bottom = 23.0
+text = "10:18:00"

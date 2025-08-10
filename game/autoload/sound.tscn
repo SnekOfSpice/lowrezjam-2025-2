@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg3qn4qe6cc87"]
+
+[ext_resource type="AudioStream" uid="uid://bxa087g2c5wgr" path="res://game/sound/music/649766__souljaunit__soulja-unit-fallen-2013.mp3" id="1_6us5k"]
+[ext_resource type="Script" uid="uid://cxbndtxceyyiu" path="res://game/autoload/sound.gd" id="1_fknwr"]
+
+[node name="Sound" type="Node"]
+script = ExtResource("1_fknwr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_6us5k")
+autoplay = true
