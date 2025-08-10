@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt7slau8bxvoe"]
+[gd_scene load_steps=6 format=3 uid="uid://bt7slau8bxvoe"]
 
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_fiiac"]
 [ext_resource type="Texture2D" uid="uid://cri83lx2i82j6" path="res://game/images/utah.png" id="1_ty0d3"]
 [ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="2_fiiac"]
 [ext_resource type="Texture2D" uid="uid://1f0a5aw5fvhc" path="res://game/start_marker.png" id="3_tfact"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_fiiac")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [node name="Utah" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
 texture = ExtResource("1_ty0d3")
+centered = false
 script = ExtResource("2_fiiac")
 
 [node name="StartMarker" type="Sprite2D" parent="."]
-position = Vector2(-19, -10)
 texture = ExtResource("3_tfact")

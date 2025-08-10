@@ -15,6 +15,7 @@ var show_time_per_character := 0.04
 var hide_time_per_character := 0.01
 
 var goal_pixels := []
+var pixel_tracker := []
 var hit_pixels := []
 
 func _ready() -> void:
@@ -30,35 +31,92 @@ func place_level(number:int):
 	for child in %LevelContainer.get_children():
 		child.queue_free()
 	
-	var level_path := "res://game/src/stencil/stencils/%s.tscn" % LEVELS[number]
+	var level_name : String = LEVELS[number]
+	var level_path := "res://game/src/stencil/stencils/%s.tscn" % level_name
 	var stencil : Stencil = load(level_path).instantiate()
 	%LevelContainer.add_child(stencil)
+	stencil.position -= Vector2(32, 32)
 	stencil.start_level.connect(on_stencil_start_level)
-	stencil.start_level.connect(on_stencil_pixel_entered)
+	stencil.entered_pixel.connect(on_stencil_pixel_entered)
+	
+	$Background.texture = load("res://game/images/backgrounds/%s.png" % level_name)
 	
 	goal_pixels.clear()
+	pixel_tracker.clear()
 	hit_pixels.clear()
 	for x in 64:
 		for y in 64:
 			var coord = Vector2(x, y)
 			if stencil.is_pixel_opaque(coord):
 				goal_pixels.append(Vector2i(coord))
+	pixel_tracker = goal_pixels.duplicate(true)
 	
-	notify(["MOUSE 2 CROSS"], 1)
+	notify([level_name], 1)
 	level_started = false
-	print(goal_pixels)
+	#print(goal_pixels)
 
 func on_stencil_pixel_entered(coord:Vector2i):
-	if hit_pixels.has(coord):
+	if not level_started:
 		return
+	if hit_pixels.has(coord):
+		prints("return from", coord)
+		return
+	place_pixel_at(coord)
+func place_pixel_at(coord:Vector2i):
 	hit_pixels.append(coord)
-	goal_pixels.erase(coord)
-	print(goal_pixels)
-	if goal_pixels.is_empty():
+	pixel_tracker.erase(coord)
+	
+	var pixel = ColorRect.new()
+	pixel.custom_minimum_size = Vector2.ONE
+	var mat = ShaderMaterial.new()
+	mat.shader = load("res://game/src/stencil/stencils/track.gdshader")
+	pixel.material = mat
+	%Paint.add_child(pixel)
+	pixel.position = coord# + Vector2i(31,31)
+	
+	if pixel_tracker.is_empty():
 		finish_level()
 
 func finish_level():
+	level_started = false
+	get_current_stencil().set_physics_process(false)
 	print("you win")
+	
+	# calculate results
+	var missed_pixels := []
+	var overdrawn_pixels := []
+	var correct_pixels := []
+	for hit in hit_pixels:
+		if hit in goal_pixels:
+			correct_pixels.append(hit)
+		else:
+			overdrawn_pixels.append(hit)
+		
+	for goal in goal_pixels:
+		if not goal in hit_pixels:
+			missed_pixels.append(goal)
+	
+	var base : float = float(correct_pixels.size()) / float(goal_pixels.size())
+	var missed : float = float(missed_pixels.size()) / float(goal_pixels.size())
+	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
+	
+	var accuracy := clampf(base - (missed * 0.5) - (overdraw * 0.5), 0, 1)
+	
+	for marker : Node2D in %MarkerOverlay.get_children():
+		marker.queue_free()
+	
+	notify([
+		"Accuracy",
+		str(int(accuracy * 100)),
+		"Time"
+	], 1, start_next_level)
+
+func start_next_level():
+	level_counter += 1
+	if level_counter >= LEVELS.size():
+		notify(["you finihsed the game", "avg acc.","total time taken"], 0, get_tree().quit)
+		return
+	place_level(level_counter)
 
 func get_current_stencil() -> Stencil:
 	if %LevelContainer.get_child(0) is Stencil:
@@ -66,18 +124,28 @@ func get_current_stencil() -> Stencil:
 	return null
 
 func on_stencil_start_level():
+	if is_notifying:
+		return
 	if level_started:
+		if hit_pixels.size() > 2:
+			finish_level()
 		return
 	level_started = true
-	print("start")
+	get_current_stencil().visited_pixels.clear()
+	place_pixel_at(get_current_stencil().get_start_coord())
+	
+	var dup = get_current_stencil().get_node("StartMarker").duplicate()
+	%MarkerOverlay.add_child(dup)
 
 var notification_tween
+var is_notifying := false
 func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
 	if skip_notifications:
 		if callable_at_end:
 			callable_at_end.call()
 		push_warning("toggle skip_notifications before exporting")
 		return
+	set_is_notifying(true)
 	if notification_tween:
 		notification_tween.kill()
 	notification_tween = create_tween()
@@ -92,3 +160,8 @@ func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
 	
 	if callable_at_end:
 		notification_tween.finished.connect(callable_at_end)
+	notification_tween.finished.connect(set_is_notifying.bind(false))
+	
+func set_is_notifying(value:bool):
+	is_notifying = value
+	%MarkerOverlay.visible = not value
