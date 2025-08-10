@@ -23,7 +23,7 @@ var time_taken := []
 
 func _ready() -> void:
 	%Notification.visible_characters = 0
-	
+	%NotifBacking.modulate.a = 0 
 	notify(["welcome", "trace the line to win"], 2, place_level.bind(0))
 
 func place_level(number:int):
@@ -171,10 +171,16 @@ func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
 		var message : String = messages[i]
 		if i == 0:
 			notification_tween.tween_property(%Notification, "text", message, 0).set_delay(initial_delay)
+			notification_tween.set_parallel(true)
+			notification_tween.tween_property(%NotifBacking, "modulate:a", 1, 0.5).set_delay(initial_delay)
+			notification_tween.set_parallel(false)
 		else:
 			notification_tween.tween_property(%Notification, "text", message, 0).set_delay(1)
 		notification_tween.tween_property(%Notification, "visible_characters", message.length(), message.length() * show_time_per_character)
 		notification_tween.tween_property(%Notification, "visible_characters", 0, message.length() * hide_time_per_character).set_delay(4)
+	
+	notification_tween.set_parallel(true)
+	notification_tween.tween_property(%NotifBacking, "modulate:a", 0, 0.5).set_delay(2)
 	
 	if callable_at_end:
 		notification_tween.finished.connect(callable_at_end)
