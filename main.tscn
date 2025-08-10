@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc35ked1dq50k"]
+[gd_scene load_steps=5 format=3 uid="uid://cc35ked1dq50k"]
 
 [ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="2_0xm2m"]
+[ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="2_h2yge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_0xm2m")
@@ -20,29 +21,6 @@ centered = false
 unique_name_in_owner = true
 position = Vector2(32, 32)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Notification" type="RichTextLabel" parent="CanvasLayer/Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.5
-offset_right = -0.5
-grow_horizontal = 2
-grow_vertical = 2
-bbcode_enabled = true
-text = "MOUSE 2 CROSS"
-fit_content = true
-
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Paint" type="Control" parent="CanvasLayer2"]
@@ -57,3 +35,27 @@ offset_bottom = 40.0
 
 [node name="MarkerOverlay" type="Node2D" parent="CanvasLayer3"]
 unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_h2yge")
+
+[node name="Notification" type="RichTextLabel" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "MOUSE 2 CROSS"
+fit_content = true

@@ -18,6 +18,9 @@ var goal_pixels := []
 var pixel_tracker := []
 var hit_pixels := []
 
+var accuracies := []
+var time_taken := []
+
 func _ready() -> void:
 	%Notification.visible_characters = 0
 	
@@ -56,6 +59,8 @@ func place_level(number:int):
 	#print(goal_pixels)
 
 func on_stencil_pixel_entered(coord:Vector2i):
+	if is_notifying:
+		return
 	if not level_started:
 		return
 	if hit_pixels.has(coord):
@@ -101,6 +106,7 @@ func finish_level():
 	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
 	
 	var accuracy := clampf(base - (missed * 0.5) - (overdraw * 0.5), 0, 1)
+	accuracies.append(accuracies)
 	
 	for marker : Node2D in %MarkerOverlay.get_children():
 		marker.queue_free()
@@ -140,12 +146,12 @@ func on_stencil_start_level():
 var notification_tween
 var is_notifying := false
 func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
+	await get_tree().process_frame
 	if skip_notifications:
 		if callable_at_end:
 			callable_at_end.call()
 		push_warning("toggle skip_notifications before exporting")
 		return
-	set_is_notifying(true)
 	if notification_tween:
 		notification_tween.kill()
 	notification_tween = create_tween()
@@ -161,6 +167,7 @@ func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
 	if callable_at_end:
 		notification_tween.finished.connect(callable_at_end)
 	notification_tween.finished.connect(set_is_notifying.bind(false))
+	set_is_notifying(true)
 	
 func set_is_notifying(value:bool):
 	is_notifying = value

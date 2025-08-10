@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bghv3g1d34qho"]
+
+[ext_resource type="FontFile" uid="uid://drs6tjf2g86og" path="res://game/visuals/font/Parallelogram.ttf" id="1_3ay0x"]
+
+[sub_resource type="FontVariation" id="FontVariation_1kt2l"]
+base_font = ExtResource("1_3ay0x")
+spacing_glyph = -1
+
+[resource]
+RichTextLabel/constants/line_separation = -3
+RichTextLabel/fonts/normal_font = SubResource("FontVariation_1kt2l")
