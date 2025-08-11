@@ -13,7 +13,7 @@ var last_pos := Vector2i(-100, -100)
 func get_start_coord() -> Vector2i:
 	return Vector2i($StartMarker.position)
 
-func _physics_process(delta: float) -> void:#(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var mouse_pos := Vector2i(get_local_mouse_position())
 	if mouse_pos.x < 0 or mouse_pos.x > 64:
 		return

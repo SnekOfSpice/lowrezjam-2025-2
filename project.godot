@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="lowrezjam 2025 2"
-run/main_scene="uid://cc35ked1dq50k"
+run/main_scene="uid://ch0qvj87mb78g"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Sound="*res://game/autoload/sound.tscn"
+GameMode="*res://game/autoload/game_mode.tscn"
 
 [display]
 

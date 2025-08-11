@@ -1,7 +1,8 @@
 extends Node2D
 
 const LEVELS := [
-	"utah"
+	"utah",
+	"arizona",
 ]
 
 ## used for dev purposes
@@ -21,10 +22,20 @@ var hit_pixels := []
 var accuracies := []
 var time_taken := []
 
+var time_left := 10.0
+
 func _ready() -> void:
 	%Notification.visible_characters = 0
 	%NotifBacking.modulate.a = 0 
-	notify(["welcome", "trace the line to win"], 2, place_level.bind(0))
+	%TimeAttackLabel.visible = GameMode.mode == GameMode.Mode.TimeAttack
+	var welcome_messages : Array
+	match GameMode.mode:
+		GameMode.Mode.Story:
+			welcome_messages = ["welcome", "trace the line to win"]
+		GameMode.Mode.TimeAttack:
+			welcome_messages = ["time attack"]
+			level_counter = randi_range(0, GameMode.highest_unlocked_level)
+	notify(welcome_messages, 2, place_level.bind(level_counter))
 
 func place_level(number:int):
 	if number >= LEVELS.size():
@@ -33,16 +44,18 @@ func place_level(number:int):
 	
 	for child in %LevelContainer.get_children():
 		child.queue_free()
+	for child in %Paint.get_children():
+		child.queue_free()
 	
 	var level_name : String = LEVELS[number]
-	var level_path := "res://game/src/stencil/stencils/%s.tscn" % level_name
+	var level_path := "res://game/levels/%s/%s.tscn" % [level_name, level_name]
 	var stencil : Stencil = load(level_path).instantiate()
 	%LevelContainer.add_child(stencil)
 	stencil.position -= Vector2(32, 32)
 	stencil.start_level.connect(on_stencil_start_level)
 	stencil.entered_pixel.connect(on_stencil_pixel_entered)
 	
-	$Background.texture = load("res://game/images/backgrounds/%s.png" % level_name)
+	$Background.texture = load("res://game/levels/%s/background.png" % level_name)
 	
 	goal_pixels.clear()
 	pixel_tracker.clear()
@@ -56,22 +69,59 @@ func place_level(number:int):
 	
 	notify([level_name], 1)
 	level_started = false
-	#print(goal_pixels)
 
 var level_time := 0.0
 func _process(delta: float) -> void:
 	if level_started:
 		level_time += delta
-		
-		
 	
+		if GameMode.mode == GameMode.Mode.TimeAttack:
+			time_left -= delta
+			if time_left <= 0:
+				time_attack_death()
+			%TimeAttackLabel.text = "%0.2f" % time_left
+	
+
+func get_average_time() -> float:
+	if time_taken.is_empty():
+		return 0.0
+	var sum := 0.0
+	for acc in time_taken:
+		sum += acc
+	return sum / float(time_taken.size())
+func get_average_accuracy() -> float:
+	if accuracies.is_empty():
+		return 0.0
+	var sum := 0.0
+	for acc in accuracies:
+		sum += acc
+	return sum / float(accuracies.size())
+
+func time_attack_death():
+	level_started = false
+	get_current_stencil().set_physics_process(false)
+	Sound.play_sfx("trumpet")
+	
+	notify(
+		[
+		"completed levels",
+		str(accuracies.size()),
+		"Avg Accuracy",
+		get_average_accuracy(),
+		"avg time",
+		get_average_time(),
+		], 3, go_to_main_menu
+	)
+
+func go_to_main_menu():
+	get_tree().call_deferred("change_scene_to_packed", load("res://main_menu.tscn"))
+
 func on_stencil_pixel_entered(coord:Vector2i):
 	if is_notifying:
 		return
 	if not level_started:
 		return
 	if hit_pixels.has(coord):
-		prints("return from", coord)
 		return
 	place_pixel_at(coord)
 func place_pixel_at(coord:Vector2i):
@@ -96,6 +146,9 @@ func finish_level():
 	get_current_stencil().set_physics_process(false)
 	Sound.play_sfx("horn")
 	
+	if GameMode.mode == GameMode.Mode.Story:
+		GameMode.highest_unlocked_level = max(level_counter, GameMode.highest_unlocked_level)
+	
 	# calculate results
 	var missed_pixels := []
 	var overdrawn_pixels := []
@@ -118,21 +171,45 @@ func finish_level():
 	accuracies.append(accuracies)
 	time_taken.append(level_time)
 	
+	# only relevant for time attack
+	var time_gained = accuracy * 1.33
+	time_left += time_gained
+	
 	for marker : Node2D in %MarkerOverlay.get_children():
 		marker.queue_free()
 	
-	notify([
+	var level_end_messages := [
 		"Accuracy",
-		str(int(accuracy * 100)),
+		str(int(accuracy * 100), " %"),
 		"Time",
 		"%0.2f s" % level_time
-	], 1, start_next_level)
+	]
+	#if GameMode.mode == GameMode.Mode.Story:
+		#level_end_messages
+	if GameMode.mode == GameMode.Mode.TimeAttack:
+		level_end_messages.append_array([
+			"Time gained",
+			"%0.2f s" % time_gained
+		])
+	
+	notify(level_end_messages, 1, start_next_level)
 
 func start_next_level():
-	level_counter += 1
-	if level_counter >= LEVELS.size():
-		notify(["you finihsed the game", "avg acc.","total time taken"], 0, get_tree().quit)
-		return
+	if GameMode.mode == GameMode.Mode.Story:
+		level_counter += 1
+		if level_counter >= LEVELS.size():
+			notify(["you finihsed the game", "avg acc.","total time taken"], 0,
+			go_to_main_menu)
+			return
+	elif GameMode.mode == GameMode.Mode.TimeAttack:
+		%TimeAttackLabel.text = "%0.2f" % time_left
+		var prev_level_counter = level_counter
+		var safety := 0
+		while safety < 9999:
+			level_counter = randi_range(0, GameMode.highest_unlocked_level)
+			if level_counter != prev_level_counter:
+				break
+			safety += 1
 	place_level(level_counter)
 
 func get_current_stencil() -> Stencil:
@@ -144,7 +221,7 @@ func on_stencil_start_level():
 	if is_notifying:
 		return
 	if level_started:
-		if hit_pixels.size() > 2:
+		if hit_pixels.size() > 5:
 			finish_level()
 		return
 	level_started = true
@@ -190,3 +267,7 @@ func notify(messages:Array, initial_delay:=0.0, callable_at_end:=Callable()):
 func set_is_notifying(value:bool):
 	is_notifying = value
 	%MarkerOverlay.visible = not value
+
+
+func _on_button_pressed() -> void:
+	go_to_main_menu()

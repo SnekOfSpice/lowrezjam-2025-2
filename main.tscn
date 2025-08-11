@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://hipo1eavkdlk" path="res://game/images/backgrounds/utah.png" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://hipo1eavkdlk" path="res://game/levels/utah/background.png" id="2_1bvp3"]
 [ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="2_h2yge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
@@ -22,9 +22,32 @@ centered = false
 unique_name_in_owner = true
 position = Vector2(32, 32)
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Paint" type="Control" parent="CanvasLayer2"]
+[node name="Control" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_h2yge")
+
+[node name="TimeAttackLabel" type="Label" parent="UILayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "time"
+horizontal_alignment = 2
+
+[node name="PaintLayer" type="CanvasLayer" parent="."]
+
+[node name="Paint" type="Control" parent="PaintLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_h2yge")
 layout_mode = 3

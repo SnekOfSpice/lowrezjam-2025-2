@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch0qvj87mb78g"]
+
+[ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://c1hqgjooku3lm" path="res://main_menu.gd" id="2_jix8l"]
+[ext_resource type="PackedScene" uid="uid://bjsrfmb5f421o" path="res://menu_button.tscn" id="3_glbon"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fu7sn")
+script = ExtResource("2_jix8l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StoryModeButton" parent="VBoxContainer/MarginContainer" node_paths=PackedStringArray("callable_target_on_selection") instance=ExtResource("3_glbon")]
+layout_mode = 2
+text = "STORY MODE"
+callable_on_selection = &"start_story_mode"
+callable_target_on_selection = NodePath("../../..")
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TimeAttackButton" parent="VBoxContainer/MarginContainer2" node_paths=PackedStringArray("callable_target_on_selection") instance=ExtResource("3_glbon")]
+layout_mode = 2
+text = "TIME ATTACK"
+callable_on_selection = &"start_time_attack"
+callable_target_on_selection = NodePath("../../..")

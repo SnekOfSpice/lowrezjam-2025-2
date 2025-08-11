@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjsrfmb5f421o"]
+
+[ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="1_cpvkq"]
+[ext_resource type="Script" uid="uid://dt1hmjctocawt" path="res://menu_button.gd" id="1_yrgx8"]
+
+[node name="MenuButton" type="Label"]
+anchors_preset = -1
+anchor_right = 0.085
+offset_left = -24.0
+offset_top = -8.0
+mouse_filter = 0
+theme = ExtResource("1_cpvkq")
+text = "START"
+horizontal_alignment = 1
+script = ExtResource("1_yrgx8")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+show_percentage = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

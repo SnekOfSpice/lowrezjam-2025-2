@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bt7slau8bxvoe"]
 
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_fiiac"]
-[ext_resource type="Texture2D" uid="uid://cri83lx2i82j6" path="res://game/images/utah.png" id="1_ty0d3"]
+[ext_resource type="Texture2D" uid="uid://cri83lx2i82j6" path="res://game/levels/utah/course.png" id="1_ty0d3"]
 [ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="2_fiiac"]
 [ext_resource type="Texture2D" uid="uid://1f0a5aw5fvhc" path="res://game/start_marker.png" id="3_tfact"]
 [ext_resource type="Texture2D" uid="uid://j5vw7qetoitk" path="res://game/start_marker4.png" id="4_0eh1b"]

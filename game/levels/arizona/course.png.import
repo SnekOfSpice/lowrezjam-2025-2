@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hipo1eavkdlk"
-path="res://.godot/imported/utah.png-c06d0d0565345ea240244d650885a24a.ctex"
+uid="uid://pqrjof873ly3"
+path="res://.godot/imported/course.png-00e9b9d00cf326a652588cd471413301.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/images/backgrounds/utah.png"
-dest_files=["res://.godot/imported/utah.png-c06d0d0565345ea240244d650885a24a.ctex"]
+source_file="res://game/levels/arizona/course.png"
+dest_files=["res://.godot/imported/course.png-00e9b9d00cf326a652588cd471413301.ctex"]
 
 [params]
 
