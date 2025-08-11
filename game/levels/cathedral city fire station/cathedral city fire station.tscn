@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://6rx0kx0nkpvr"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_jhbh6"]
+[ext_resource type="Texture2D" uid="uid://7fc4gfwheuke" path="res://game/levels/cathedral city fire station/course.png" id="2_s6sft"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_kbq2n"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_ps1k3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_jhbh6")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="FireStation" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_s6sft")
+centered = false
+script = ExtResource("3_kbq2n")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_ps1k3")]
+position = Vector2(30, 12)

@@ -3,11 +3,12 @@ extends Node2D
 const LEVELS := [
 	"utah",
 	"arizona",
+	"cathedral city fire station",
 ]
 
 # optional array of lines to show at the start of the level
 const LORE := {
-	"utah" : ["this place gay as hell"]
+	"utah" : ["this place never felt like home"]
 }
 
 ## used for dev purposes
@@ -90,6 +91,14 @@ func _process(delta: float) -> void:
 			%TimeAttackLabel.text = "%0.2f" % time_left
 	
 
+func get_total_time() -> float:
+	if time_taken.is_empty():
+		return 0.0
+	var sum := 0.0
+	for time in time_taken:
+		sum += time
+	sum += level_time
+	return sum
 func get_average_time() -> float:
 	if time_taken.is_empty():
 		return 0.0
@@ -132,7 +141,7 @@ func on_stencil_pixel_entered(coord:Vector2i):
 	if hit_pixels.has(coord):
 		return
 	place_pixel_at(coord)
-func place_pixel_at(coord:Vector2i):
+func place_pixel_at(coord:Vector2i, closing_pixel := false):
 	hit_pixels.append(coord)
 	pixel_tracker.erase(coord)
 	
@@ -146,11 +155,11 @@ func place_pixel_at(coord:Vector2i):
 	
 	Sound.play_sfx("click")
 	
-	if pixel_tracker.is_empty():
+	if pixel_tracker.is_empty() and not closing_pixel:
 		finish_level()
 
 func finish_level():
-	place_pixel_at(Vector2i(get_current_stencil().get_local_mouse_position()))
+	place_pixel_at(Vector2i(get_current_stencil().get_local_mouse_position()), true)
 	level_started = false
 	get_current_stencil().set_physics_process(false)
 	Sound.play_sfx("horn")
@@ -207,7 +216,16 @@ func start_next_level():
 	if GameMode.mode == GameMode.Mode.Story:
 		level_counter += 1
 		if level_counter >= LEVELS.size():
-			notify(["you finihsed the game", "avg acc.","total time taken"], 0,
+			notify(
+				["you finihsed the game",
+				"avg acc.",
+				get_average_accuracy(),
+				"avg time taken",
+				get_average_time(),
+				"total time",
+				get_total_time()
+				]
+				, 0,
 			go_to_main_menu)
 			return
 	elif GameMode.mode == GameMode.Mode.TimeAttack:
