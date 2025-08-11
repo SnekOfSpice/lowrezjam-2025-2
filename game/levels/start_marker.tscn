@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpw1jokkx8oj6"]
+
+[ext_resource type="Texture2D" uid="uid://j5vw7qetoitk" path="res://game/start_marker4.png" id="1_ibu2j"]
+[ext_resource type="Texture2D" uid="uid://chugpxp3h87p5" path="res://game/start_marker2.png" id="2_6n22i"]
+[ext_resource type="Texture2D" uid="uid://1f0a5aw5fvhc" path="res://game/start_marker.png" id="3_alhkb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0eh1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ibu2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6n22i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_alhkb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="StartMarker" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0eh1b")
+autoplay = "default"
+frame_progress = 0.639501

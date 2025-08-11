@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt7slau8bxvoe"]
+[gd_scene load_steps=6 format=3 uid="uid://bt7slau8bxvoe"]
 
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_fiiac"]
 [ext_resource type="Texture2D" uid="uid://cri83lx2i82j6" path="res://game/levels/utah/course.png" id="1_ty0d3"]
 [ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="2_fiiac"]
-[ext_resource type="Texture2D" uid="uid://1f0a5aw5fvhc" path="res://game/start_marker.png" id="3_tfact"]
-[ext_resource type="Texture2D" uid="uid://j5vw7qetoitk" path="res://game/start_marker4.png" id="4_0eh1b"]
-[ext_resource type="Texture2D" uid="uid://chugpxp3h87p5" path="res://game/start_marker2.png" id="4_tfact"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_bqh7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
 shader = ExtResource("1_fiiac")
@@ -13,31 +11,11 @@ shader_parameter/strength = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/angle = 0.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0eh1b"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_0eh1b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_tfact")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_tfact")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
 [node name="Utah" type="Sprite2D"]
 material = SubResource("ShaderMaterial_tfact")
 texture = ExtResource("1_ty0d3")
 centered = false
 script = ExtResource("2_fiiac")
 
-[node name="StartMarker" type="AnimatedSprite2D" parent="."]
-position = Vector2(13, 11)
-sprite_frames = SubResource("SpriteFrames_0eh1b")
-autoplay = "default"
-frame_progress = 0.639501
+[node name="StartMarker" parent="." instance=ExtResource("4_bqh7p")]
+position = Vector2(22, 15)

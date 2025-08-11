@@ -5,6 +5,11 @@ const LEVELS := [
 	"arizona",
 ]
 
+# optional array of lines to show at the start of the level
+const LORE := {
+	"utah" : ["this place gay as hell"]
+}
+
 ## used for dev purposes
 @export var skip_notifications := false
 
@@ -22,7 +27,8 @@ var hit_pixels := []
 var accuracies := []
 var time_taken := []
 
-var time_left := 10.0
+const TIME_PER_LEVEL := 15.0
+var time_left := TIME_PER_LEVEL
 
 func _ready() -> void:
 	%Notification.visible_characters = 0
@@ -67,7 +73,9 @@ func place_level(number:int):
 				goal_pixels.append(Vector2i(coord))
 	pixel_tracker = goal_pixels.duplicate(true)
 	
-	notify([level_name], 1)
+	var intro_messages := [level_name]
+	intro_messages.append_array(LORE.get(level_name, []))
+	notify(intro_messages, 1)
 	level_started = false
 
 var level_time := 0.0
@@ -167,12 +175,12 @@ func finish_level():
 	var missed : float = float(missed_pixels.size()) / float(goal_pixels.size())
 	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
 	
-	var accuracy := clampf(base - (missed * 0.5) - (overdraw * 0.5), 0, 1)
+	var accuracy := clampf(base - max(missed, overdraw), 0, 1)
 	accuracies.append(accuracies)
 	time_taken.append(level_time)
 	
 	# only relevant for time attack
-	var time_gained = accuracy * 1.33
+	var time_gained = accuracy * 1.33 * TIME_PER_LEVEL
 	time_left += time_gained
 	
 	for marker : Node2D in %MarkerOverlay.get_children():

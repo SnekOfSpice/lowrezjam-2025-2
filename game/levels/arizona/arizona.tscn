@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c43042o7rovlc"]
+[gd_scene load_steps=6 format=3 uid="uid://c43042o7rovlc"]
 
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_w0aqh"]
 [ext_resource type="Texture2D" uid="uid://pqrjof873ly3" path="res://game/levels/arizona/course.png" id="2_j062u"]
 [ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_rkol4"]
-[ext_resource type="Texture2D" uid="uid://j5vw7qetoitk" path="res://game/start_marker4.png" id="4_oj6my"]
-[ext_resource type="Texture2D" uid="uid://chugpxp3h87p5" path="res://game/start_marker2.png" id="5_oisn1"]
-[ext_resource type="Texture2D" uid="uid://1f0a5aw5fvhc" path="res://game/start_marker.png" id="6_2g0hg"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_w5buw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
 shader = ExtResource("1_w0aqh")
@@ -13,31 +11,11 @@ shader_parameter/strength = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/angle = 0.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0eh1b"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_oj6my")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_oisn1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_2g0hg")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
 [node name="Arizona" type="Sprite2D"]
 material = SubResource("ShaderMaterial_tfact")
 texture = ExtResource("2_j062u")
 centered = false
 script = ExtResource("3_rkol4")
 
-[node name="StartMarker" type="AnimatedSprite2D" parent="."]
-position = Vector2(50, 32)
-sprite_frames = SubResource("SpriteFrames_0eh1b")
-autoplay = "default"
-frame = 2
+[node name="StartMarker" parent="." instance=ExtResource("4_w5buw")]
+position = Vector2(51, 32)
