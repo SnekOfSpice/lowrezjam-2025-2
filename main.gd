@@ -150,6 +150,7 @@ func place_pixel_at(coord:Vector2i):
 		finish_level()
 
 func finish_level():
+	place_pixel_at(Vector2i(get_current_stencil().get_local_mouse_position()))
 	level_started = false
 	get_current_stencil().set_physics_process(false)
 	Sound.play_sfx("horn")
