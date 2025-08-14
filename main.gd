@@ -131,7 +131,7 @@ func time_attack_death():
 	
 	notify(
 		[
-		"completed levels",
+		"you never should've returned",
 		str(accuracies.size()),
 		"Avg Accuracy",
 		get_average_accuracy(),
@@ -227,13 +227,7 @@ func start_next_level():
 		level_counter += 1
 		if level_counter >= LEVELS.size():
 			notify(
-				["you finihsed the game",
-				"avg acc.",
-				get_average_accuracy(),
-				"avg time taken",
-				get_average_time(),
-				"total time",
-				get_total_time()
+				["perhaps I should leave this place too"
 				]
 				, 0,
 			go_to_main_menu)
