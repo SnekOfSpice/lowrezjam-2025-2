@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqkiwovbyjodv"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_uj4g3"]
+[ext_resource type="Texture2D" uid="uid://c17qijbh444gr" path="res://game/levels/caledon/course.png" id="2_sxxy2"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_gh20e"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_00k6x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_uj4g3")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Caledon" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_sxxy2")
+centered = false
+script = ExtResource("3_gh20e")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_00k6x")]
+position = Vector2(31, 9)

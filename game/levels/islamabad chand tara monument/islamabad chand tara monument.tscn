@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjunuc253d36n"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_l1tpi"]
+[ext_resource type="Texture2D" uid="uid://c41qkinjt8h2g" path="res://game/levels/islamabad chand tara monument/course.png" id="2_26ro3"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_vrd2t"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_eeot7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_l1tpi")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Islamabad" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_26ro3")
+centered = false
+script = ExtResource("3_vrd2t")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_eeot7")]
+position = Vector2(38, 16)

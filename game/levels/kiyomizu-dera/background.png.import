@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2i2u6w0d04nk"
-path="res://.godot/imported/background.png-d7d632092bee025c18f0778d675dd58f.ctex"
+uid="uid://dlsg2tto5umyx"
+path="res://.godot/imported/background.png-31cf9309339f282ea313723b5f3a6b42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/levels/arizona/background.png"
-dest_files=["res://.godot/imported/background.png-d7d632092bee025c18f0778d675dd58f.ctex"]
+source_file="res://game/levels/kiyomizu-dera/background.png"
+dest_files=["res://.godot/imported/background.png-31cf9309339f282ea313723b5f3a6b42.ctex"]
 
 [params]
 

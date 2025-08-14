@@ -1,18 +1,28 @@
 extends Node2D
-
+ 
 const LEVELS := [
 	"utah",
-	"arizona",
+	"caledon",
+	"redonda",
 	"cathedral city fire station",
+	"moraine lake",
+	"oregon",
+	"islamabad chand tara monument",
+	"irkutsk",
+	"santorini",
+	"kiyomizu-dera",
+	"pitt meadows",
 ]
 
 # optional array of lines to show at the start of the level
 const LORE := {
-	"utah" : ["this place never felt like home"]
+	"islamabad" : ["im surprised the lights work"],
+	"santorini" : ["the paint hasnt faded"],
+	"pitt meadows" : ["the world is empty"],
 }
 
 ## used for dev purposes
-@export var skip_notifications := false
+@export var skip_notifications := true
 
 var level : String
 var level_counter := 0
@@ -38,7 +48,7 @@ func _ready() -> void:
 	var welcome_messages : Array
 	match GameMode.mode:
 		GameMode.Mode.Story:
-			welcome_messages = ["welcome", "trace the line to win"]
+			welcome_messages = ["welcome", "trace the line to win", "pixels missed or off lower accuracy"]
 		GameMode.Mode.TimeAttack:
 			welcome_messages = ["time attack"]
 			level_counter = randi_range(0, GameMode.highest_unlocked_level)
@@ -185,7 +195,7 @@ func finish_level():
 	var missed : float = float(missed_pixels.size()) / float(goal_pixels.size())
 	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
 	
-	var accuracy := clampf(base - max(missed, overdraw), 0, 1)
+	var accuracy := clampf(base - max(missed, overdraw) / 2, 0, 1)
 	accuracies.append(accuracies)
 	time_taken.append(level_time)
 	

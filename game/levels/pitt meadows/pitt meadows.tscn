@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1ul7rnwah5v5"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_46qwg"]
+[ext_resource type="Texture2D" uid="uid://cycaewy1yguqg" path="res://game/levels/pitt meadows/course.png" id="2_jgtq8"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_b5rbh"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_pvlsl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_46qwg")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Pitt Meadows" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_jgtq8")
+centered = false
+script = ExtResource("3_b5rbh")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_pvlsl")]
+position = Vector2(34, 9)

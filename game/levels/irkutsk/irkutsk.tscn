@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwr1rfa3hhc66"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_qa74k"]
+[ext_resource type="Texture2D" uid="uid://ctued12gv44vq" path="res://game/levels/irkutsk/course.png" id="2_yphrt"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_3peh5"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_whgsd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_qa74k")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Irkutsk" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_yphrt")
+centered = false
+script = ExtResource("3_3peh5")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_whgsd")]
+position = Vector2(38, 11)

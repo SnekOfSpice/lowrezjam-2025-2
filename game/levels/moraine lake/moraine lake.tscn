@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj8osg38gibv6"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_d74a7"]
+[ext_resource type="Texture2D" uid="uid://cc1vbdffahlty" path="res://game/levels/moraine lake/course.png" id="2_cg75y"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_6shm4"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_1etji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_d74a7")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Moraine Lake" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_cg75y")
+centered = false
+script = ExtResource("3_6shm4")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_1etji")]
+position = Vector2(30, 51)

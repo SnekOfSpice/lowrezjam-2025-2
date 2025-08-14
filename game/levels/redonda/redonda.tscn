@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://t12owb1nngvr"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_kjl8i"]
+[ext_resource type="Texture2D" uid="uid://c05ep3xd3in7h" path="res://game/levels/redonda/course.png" id="2_rs6xh"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_c8bk2"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_o63jk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_kjl8i")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Redonda" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_rs6xh")
+centered = false
+script = ExtResource("3_c8bk2")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_o63jk")]
+position = Vector2(54, 41)

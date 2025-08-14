@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://7njx2l4m56q2"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_xxkay"]
+[ext_resource type="Texture2D" uid="uid://b42nr15cp8m7x" path="res://game/levels/kiyomizu-dera/course.png" id="2_yk3bh"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_7ffqm"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_mk8ws"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_xxkay")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Kiyomizu-Dera" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_yk3bh")
+centered = false
+script = ExtResource("3_7ffqm")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_mk8ws")]
+position = Vector2(31, 7)
