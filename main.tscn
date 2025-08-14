@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cc35ked1dq50k"]
+[gd_scene load_steps=8 format=3 uid="uid://cc35ked1dq50k"]
 
 [ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://hipo1eavkdlk" path="res://game/levels/utah/background.png" id="2_1bvp3"]
 [ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="2_h2yge"]
+[ext_resource type="Shader" uid="uid://dgcq6pbm68730" path="res://bgnoise.gdshader" id="5_lquwl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+shader = ExtResource("5_lquwl")
+shader_parameter/intensity = 0.61
+shader_parameter/intensity_floor = 0.19
+shader_parameter/intensity_ceil = 0.72
+shader_parameter/pulse_speed = 6.91
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_0xm2m")
@@ -21,6 +29,16 @@ centered = false
 [node name="LevelContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(32, 32)
+
+[node name="NoiseLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="NoiseLayer"]
+material = SubResource("ShaderMaterial_7mycd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
