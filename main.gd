@@ -23,6 +23,10 @@ const LORE := {
 
 ## used for dev purposes
 @export var skip_notifications := true
+@export_group("Story BGM progression")
+@export var fx_start_level : int
+@export var fx_end_level : int
+@export var noise_start_level : int
 
 var level : String
 var level_counter := 0
@@ -58,6 +62,12 @@ func place_level(number:int):
 	if number >= LEVELS.size():
 		push_warning("Tried starting level %s but we only have %s levels" % [number, LEVELS.size()])
 		return
+	
+	if GameMode.mode == GameMode.Mode.Story:
+		Sound.set_noise(number >= noise_start_level)
+		var fx_ratio := float(number - fx_start_level + 1) / float(fx_end_level - fx_start_level + 1)
+		fx_ratio = clampf(fx_ratio, 0, 1)
+		Sound.set_fx_ratio(fx_ratio)
 	
 	for child in %LevelContainer.get_children():
 		child.queue_free()

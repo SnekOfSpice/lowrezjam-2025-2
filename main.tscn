@@ -21,6 +21,9 @@ shader_parameter/angle = 0.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
+fx_start_level = 4
+fx_end_level = 7
+noise_start_level = 9
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_1bvp3")
@@ -31,6 +34,7 @@ unique_name_in_owner = true
 position = Vector2(32, 32)
 
 [node name="NoiseLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="NoiseLayer"]
 material = SubResource("ShaderMaterial_7mycd")
