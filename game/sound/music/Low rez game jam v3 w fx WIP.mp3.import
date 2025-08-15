@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgrjt2qorkoic"
+path="res://.godot/imported/Low rez game jam v3 w fx WIP.mp3-0928aea6b5eba4b40d4273c9b0b918ce.mp3str"
+
+[deps]
+
+source_file="res://game/sound/music/Low rez game jam v3 w fx WIP.mp3"
+dest_files=["res://.godot/imported/Low rez game jam v3 w fx WIP.mp3-0928aea6b5eba4b40d4273c9b0b918ce.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
