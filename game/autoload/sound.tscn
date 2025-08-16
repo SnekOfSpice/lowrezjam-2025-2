@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bg3qn4qe6cc87"]
 
 [ext_resource type="Script" uid="uid://cxbndtxceyyiu" path="res://game/autoload/sound.gd" id="1_fknwr"]
-[ext_resource type="AudioStream" uid="uid://dqmtsxmdw7aib" path="res://game/sound/music/Low rez game jam v3 no fx WIP.mp3" id="2_5tt2k"]
-[ext_resource type="AudioStream" uid="uid://bgrjt2qorkoic" path="res://game/sound/music/Low rez game jam v3 w fx WIP.mp3" id="3_pic72"]
+[ext_resource type="AudioStream" uid="uid://brflu5rtiea77" path="res://game/sound/music/Low rez game jam v3 Final No FX.ogg" id="2_5tt2k"]
+[ext_resource type="AudioStream" uid="uid://d3mxsnutfoamp" path="res://game/sound/music/Low rez game jam v3 fx 2025-08-16 0019.ogg" id="3_pic72"]
 [ext_resource type="AudioStream" uid="uid://c6p2ku6nudgq6" path="res://game/sound/music/noise1.ogg" id="4_ugqv7"]
 
 [node name="Sound" type="Node"]
