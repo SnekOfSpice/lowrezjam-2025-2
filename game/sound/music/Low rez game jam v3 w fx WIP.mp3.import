@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Low rez game jam v3 w fx WIP.mp3-0928aea6b5eb
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
