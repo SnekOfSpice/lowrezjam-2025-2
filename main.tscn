@@ -21,6 +21,7 @@ shader_parameter/angle = 0.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
+skip_notifications = false
 fx_start_level = 4
 fx_end_level = 7
 noise_start_level = 9
@@ -104,16 +105,13 @@ grow_vertical = 2
 [node name="Notification" type="RichTextLabel" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.5
-offset_right = -0.5
+offset_bottom = 29.0
 grow_horizontal = 2
-grow_vertical = 2
 bbcode_enabled = true
-text = "MOUSE 2 CROSS"
 fit_content = true
+scroll_active = false
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer/Control"]
 visible = false

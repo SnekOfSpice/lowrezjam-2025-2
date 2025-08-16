@@ -1,18 +1,6 @@
 extends Node2D
  
-const LEVELS := [
-	"utah",
-	"caledon",
-	"redonda",
-	"cathedral city fire station",
-	"moraine lake",
-	"oregon",
-	"islamabad chand tara monument",
-	"irkutsk",
-	"santorini",
-	"kiyomizu-dera",
-	"pitt meadows",
-]
+
 
 # optional array of lines to show at the start of the level
 const LORE := {
@@ -59,8 +47,8 @@ func _ready() -> void:
 	notify(welcome_messages, 2, place_level.bind(level_counter))
 
 func place_level(number:int):
-	if number >= LEVELS.size():
-		push_warning("Tried starting level %s but we only have %s levels" % [number, LEVELS.size()])
+	if number >= GameMode.LEVELS.size():
+		push_warning("Tried starting level %s but we only have %s GameMode.LEVELS" % [number, GameMode.LEVELS.size()])
 		return
 	
 	if GameMode.mode == GameMode.Mode.Story:
@@ -74,7 +62,7 @@ func place_level(number:int):
 	for child in %Paint.get_children():
 		child.queue_free()
 	
-	var level_name : String = LEVELS[number]
+	var level_name : String = GameMode.LEVELS[number]
 	var level_path := "res://game/levels/%s/%s.tscn" % [level_name, level_name]
 	var stencil : Stencil = load(level_path).instantiate()
 	%LevelContainer.add_child(stencil)
@@ -185,7 +173,7 @@ func finish_level():
 	Sound.play_sfx("horn")
 	
 	if GameMode.mode == GameMode.Mode.Story:
-		GameMode.highest_unlocked_level = max(level_counter, GameMode.highest_unlocked_level)
+		GameMode.set_highest_unlocked_level(max(level_counter, GameMode.highest_unlocked_level))
 	
 	# calculate results
 	var missed_pixels := []
@@ -235,7 +223,7 @@ func finish_level():
 func start_next_level():
 	if GameMode.mode == GameMode.Mode.Story:
 		level_counter += 1
-		if level_counter >= LEVELS.size():
+		if level_counter >= GameMode.LEVELS.size():
 			notify(
 				["perhaps I should leave this place too"
 				]

@@ -1,8 +1,15 @@
 extends Control
 
 func _ready() -> void:
+	Sound.set_fx_ratio(0)
+	Sound.set_noise(false)
 	if GameMode.highest_unlocked_level == 0:
 		call_deferred("start_story_mode")
+	
+	
+	var number : int = randi_range(0, GameMode.highest_unlocked_level)
+	var level_name : String = GameMode.LEVELS[number]
+	$Background.texture = load("res://game/levels/%s/background.png" % level_name)
 
 func start_story_mode():
 	GameMode.initialize_mode(GameMode.Mode.Story)
