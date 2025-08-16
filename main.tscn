@@ -31,6 +31,7 @@ unique_name_in_owner = true
 position = Vector2(32, 32)
 
 [node name="NoiseLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="NoiseLayer"]
 material = SubResource("ShaderMaterial_7mycd")

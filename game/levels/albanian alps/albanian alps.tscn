@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcra5fhgnj4hr"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_imeid"]
+[ext_resource type="Texture2D" uid="uid://bh2m3faq1xrsd" path="res://game/levels/albanian alps/course.png" id="2_kpw48"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_v6d48"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_64knw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_imeid")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Albanain Alps" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_kpw48")
+centered = false
+script = ExtResource("3_v6d48")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_64knw")]
+position = Vector2(4, 44)

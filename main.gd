@@ -12,17 +12,19 @@ const LEVELS := [
 	"santorini",
 	"kiyomizu-dera",
 	"pitt meadows",
+	"albanian alps",
 ]
 
 # optional array of lines to show at the start of the level
 const LORE := {
 	"islamabad" : ["im surprised the lights work"],
 	"santorini" : ["the paint hasnt faded"],
-	"pitt meadows" : ["the world is empty"],
+	"pitt meadows" : ["why is it all is empty"],
+	"albanian alps" : ["its all empty"],
 }
 
 ## used for dev purposes
-@export var skip_notifications := true
+@export var skip_notifications := false
 
 var level : String
 var level_counter := 0
