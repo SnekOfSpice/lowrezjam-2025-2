@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d3mxsnutfoamp"
+path="res://.godot/imported/Low rez game jam v3 fx 2025-08-16 0019.ogg-dc1a4757df36aae8835c88b4511a97cd.oggvorbisstr"
+
+[deps]
+
+source_file="res://game/sound/music/Low rez game jam v3 fx 2025-08-16 0019.ogg"
+dest_files=["res://.godot/imported/Low rez game jam v3 fx 2025-08-16 0019.ogg-dc1a4757df36aae8835c88b4511a97cd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
