@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1v2hanrmqdia"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_nnrux"]
+[ext_resource type="Texture2D" uid="uid://8d1b2lxd8awh" path="res://game/levels/plose/course.png" id="2_5p3ul"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_f3ldn"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_hclru"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_nnrux")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Plose" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_5p3ul")
+centered = false
+script = ExtResource("3_f3ldn")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_hclru")]
+position = Vector2(36, 8)

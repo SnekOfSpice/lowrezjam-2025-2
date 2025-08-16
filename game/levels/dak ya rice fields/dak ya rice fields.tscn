@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bybpaq0iwblow"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_bivbg"]
+[ext_resource type="Texture2D" uid="uid://cvpl04fxdifs4" path="res://game/levels/dak ya rice fields/course.png" id="2_1ln34"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_aepif"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_bogr2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_bivbg")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Dak Ya Rice Fields" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_1ln34")
+centered = false
+script = ExtResource("3_aepif")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_bogr2")]
+position = Vector2(16, 25)

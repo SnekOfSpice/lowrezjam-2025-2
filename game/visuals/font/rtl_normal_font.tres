@@ -1,7 +1,6 @@
 [gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cyda3mxjuym84"]
 
-[ext_resource type="FontFile" uid="uid://drs6tjf2g86og" path="res://game/visuals/font/Parallelogram.ttf" id="1_sre08"]
+[ext_resource type="FontFile" uid="uid://ba08p5og3y6dn" path="res://game/visuals/font/ciceronesans.ttf" id="1_sre08"]
 
 [resource]
 base_font = ExtResource("1_sre08")
-spacing_glyph = -1

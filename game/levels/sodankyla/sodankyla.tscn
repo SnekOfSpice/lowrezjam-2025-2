@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtrkmtkvvlydy"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_jg66k"]
+[ext_resource type="Texture2D" uid="uid://cvjqwixtk32jp" path="res://game/levels/sodankyla/course.png" id="2_jaeg7"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_x0nui"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_0k5b5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_jg66k")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Sodankyla" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_jaeg7")
+centered = false
+script = ExtResource("3_x0nui")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_0k5b5")]
+position = Vector2(32, 55)

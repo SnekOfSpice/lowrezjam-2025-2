@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://lbwbvxu6fuak"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_wxlmb"]
+[ext_resource type="Texture2D" uid="uid://cwa5b42l8xpar" path="res://game/levels/maui/course.png" id="2_3q8dx"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_2at13"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_nxlsf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_wxlmb")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Maui" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_3q8dx")
+centered = false
+script = ExtResource("3_2at13")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_nxlsf")]
+position = Vector2(2, 49)

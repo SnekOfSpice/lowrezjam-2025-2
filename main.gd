@@ -13,14 +13,23 @@ const LEVELS := [
 	"kiyomizu-dera",
 	"pitt meadows",
 	"albanian alps",
+	"maui",
+	"myrland",
+	"plose",
+	"taktsang gompa tawang",
+	"greenland",
+	"dak ya rice fields",
+	"sodankyla",
 ]
 
 # optional array of lines to show at the start of the level
 const LORE := {
-	"islamabad" : ["im surprised the lights work"],
+	"islamabad chand tara monument" : ["im surprised the lights work"],
 	"santorini" : ["the paint hasnt faded"],
 	"pitt meadows" : ["why is it all is empty"],
-	"albanian alps" : ["its all empty"],
+	"albanian alps" : ["where has everyone gone"],
+	"maui" : ["everywhere i look"],
+	"myrland" : ["everyone has left"]
 }
 
 ## used for dev purposes
@@ -197,7 +206,7 @@ func finish_level():
 	var missed : float = float(missed_pixels.size()) / float(goal_pixels.size())
 	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
 	
-	var accuracy := clampf(base - max(missed, overdraw) / 2, 0, 1)
+	var accuracy := clampf(base - max(missed, overdraw) / 3, 0, 1)
 	accuracies.append(accuracies)
 	time_taken.append(level_time)
 	
