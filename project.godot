@@ -13,7 +13,8 @@ config_version=5
 config/name="Illaquaetion"
 run/main_scene="uid://ch0qvj87mb78g"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://c5a42skbv8ipl"
+config/windows_native_icon="res://game/icon.ico"
 
 [autoload]
 
