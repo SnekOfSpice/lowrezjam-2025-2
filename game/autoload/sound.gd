@@ -17,9 +17,9 @@ func set_noise(ratio:float):
 	$Noise.set_volume_linear(ratio)
 
 func set_muted(muted:bool):
-	$BGMNoFX.set_volume_linear(0 if muted else 1)
-	$BGMFX.set_volume_linear(0)
-	$Noise.set_volume_linear(0)
+	$BGMNoFX.stream_paused = muted
+	$BGMFX.stream_paused = muted
+	$Noise.stream_paused = muted
 	#var music_bus_index := AudioServer.get_bus_index("Music")
 	#AudioServer.set_bus_volume_linear(music_bus_index, 0 if muted else 1)
 
