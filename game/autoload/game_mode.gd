@@ -23,6 +23,7 @@ const LEVELS := [
 	"sodankyla",
 	"wanaka",
 	"schloss lichtenstein",
+	"zamora",
 	"where has everyone gone",
 	"everywhere i look",
 	"everyone has left",
