@@ -17,8 +17,11 @@ func set_noise(ratio:float):
 	$Noise.set_volume_linear(ratio)
 
 func set_muted(muted:bool):
-	var music_bus_index := AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_linear(music_bus_index, 0 if muted else 1)
+	$BGMNoFX.set_volume_linear(0 if muted else 1)
+	$BGMFX.set_volume_linear(0)
+	$Noise.set_volume_linear(0)
+	#var music_bus_index := AudioServer.get_bus_index("Music")
+	#AudioServer.set_bus_volume_linear(music_bus_index, 0 if muted else 1)
 
 func play_sfx(file_name:String):
 	var path := str("res://game/sound/sfx/", file_name, ".ogg")

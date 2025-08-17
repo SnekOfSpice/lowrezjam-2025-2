@@ -122,6 +122,7 @@ func _process(delta: float) -> void:
 	
 		if GameMode.mode == GameMode.Mode.TimeAttack:
 			time_left -= delta
+			time_left = max(time_left, 0)
 			if time_left <= 0:
 				time_attack_death()
 			%TimeAttackLabel.text = "%0.2f" % time_left
@@ -157,12 +158,12 @@ func time_attack_death():
 	
 	notify(
 		[
-		"you never should've returned",
+		"you never should have returned",
 		str(accuracies.size()),
 		"Avg Accuracy",
-		get_average_accuracy(),
+		str(get_average_accuracy()),
 		"avg time",
-		get_average_time(),
+		str(get_average_time()),
 		], 3, go_to_main_menu
 	)
 
@@ -222,7 +223,7 @@ func finish_level():
 	var overdraw : float = float(overdrawn_pixels.size()) / float(goal_pixels.size())
 	
 	var accuracy := clampf(base - max(missed, overdraw) / 3, 0, 1)
-	accuracies.append(accuracies)
+	accuracies.append(accuracy)
 	time_taken.append(level_time)
 	
 	# only relevant for time attack

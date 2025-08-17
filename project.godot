@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Illaquaetion"
+config/name="Illaqueation"
 run/main_scene="uid://ch0qvj87mb78g"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://c5a42skbv8ipl"

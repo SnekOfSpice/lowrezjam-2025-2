@@ -41,7 +41,7 @@ size_flags_vertical = 0
 theme_override_constants/line_spacing = -3
 theme_override_fonts/font = SubResource("FontVariation_glbon")
 text = "Illa
-quae
+quea
 tion"
 horizontal_alignment = 1
 
