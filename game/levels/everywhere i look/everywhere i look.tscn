@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn563m8r81g5r"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_vmgso"]
+[ext_resource type="Texture2D" uid="uid://cmss6qhq3r0v6" path="res://game/levels/everywhere i look/course.png" id="2_ym7hy"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_8frbl"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_nqgbn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_vmgso")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Vatican City" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_ym7hy")
+centered = false
+script = ExtResource("3_8frbl")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_nqgbn")]
+position = Vector2(4, 33)

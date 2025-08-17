@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://teu4dsctsfon"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_x14ul"]
+[ext_resource type="Texture2D" uid="uid://k5f5jcb1aux0" path="res://game/levels/zamora/course.png" id="2_qcdaq"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_pu1qb"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_x46fh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_x14ul")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Zamora" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_qcdaq")
+centered = false
+script = ExtResource("3_pu1qb")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_x46fh")]
+position = Vector2(5, 29)

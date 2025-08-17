@@ -1,26 +1,4 @@
 extends Node2D
- 
-const LEVELS := [
-	"utah",
-	"caledon",
-	"redonda",
-	"cathedral city fire station",
-	"moraine lake",
-	"oregon",
-	"islamabad chand tara monument",
-	"irkutsk",
-	"santorini",
-	"kiyomizu-dera",
-	"pitt meadows",
-	"albanian alps",
-	"maui",
-	"myrland",
-	"plose",
-	"taktsang gompa tawang",
-	"greenland",
-	"dak ya rice fields",
-	"sodankyla",
-]
 
 # optional array of lines to show at the start of the level
 const LORE := {
@@ -29,7 +7,12 @@ const LORE := {
 	"pitt meadows" : ["why is it all is empty"],
 	"albanian alps" : ["where has everyone gone"],
 	"maui" : ["everywhere i look"],
-	"myrland" : ["everyone has left"]
+	"myrland" : ["everyone has left"],
+	"dak ya rice fields" : ["their ghosts still haunt this earth"],
+	"saint basils cathedral" : ["their monuments linger"],
+	"sodankyla" : ["maybe im the actual ghost"],
+	"wanaka" : ["all that truly lingers here is me"],
+	"zamora" : ["all that truly lingers here\n\nis me"]
 }
 
 ## used for dev purposes

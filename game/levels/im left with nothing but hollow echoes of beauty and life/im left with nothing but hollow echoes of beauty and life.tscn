@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://derqy7hxvwo3"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_2m288"]
+[ext_resource type="Texture2D" uid="uid://dcp7l8uvxfyi2" path="res://game/levels/im left with nothing but hollow echoes of beauty and life/course.png" id="2_7y2q2"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_nld41"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_rgueo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_2m288")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Nowhere" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_7y2q2")
+centered = false
+script = ExtResource("3_nld41")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_rgueo")]
+position = Vector2(32, 32)

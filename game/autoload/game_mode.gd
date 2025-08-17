@@ -12,6 +12,21 @@ const LEVELS := [
 	"santorini",
 	"kiyomizu-dera",
 	"pitt meadows",
+	"albanian alps",
+	"maui",
+	"myrland",
+	"plose",
+	"taktsang gompa tawang",
+	"greenland",
+	"dak ya rice fields",
+	"saint basils cathedral",
+	"sodankyla",
+	"wanaka",
+	"schloss lichtenstein",
+	"where has everyone gone",
+	"everywhere i look",
+	"everyone has left",
+	"im left with nothing but hollow echoes of beauty and life"
 ]
 
 

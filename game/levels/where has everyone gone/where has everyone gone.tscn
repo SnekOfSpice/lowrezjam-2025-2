@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsc7kky2cqi84"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_iw52h"]
+[ext_resource type="Texture2D" uid="uid://3x4x14qkgwna" path="res://game/levels/where has everyone gone/course.png" id="2_qpqq1"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_l4m1e"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_yh1aw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_iw52h")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Where Has Everyone Gone" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_qpqq1")
+centered = false
+script = ExtResource("3_l4m1e")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_yh1aw")]
+position = Vector2(19, 38)

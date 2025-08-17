@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkmerm0f1mgw"]
+
+[ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="1_gcm6t"]
+[ext_resource type="Texture2D" uid="uid://36ucf2s8i0s" path="res://game/levels/schloss lichtenstein/course.png" id="2_d13fp"]
+[ext_resource type="Script" uid="uid://cmj5jya5464st" path="res://game/src/stencil/stencil.gd" id="3_biepn"]
+[ext_resource type="PackedScene" uid="uid://dpw1jokkx8oj6" path="res://game/levels/start_marker.tscn" id="4_uthkh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfact"]
+shader = ExtResource("1_gcm6t")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[node name="Scloss Lichtenstein" type="Sprite2D"]
+material = SubResource("ShaderMaterial_tfact")
+texture = ExtResource("2_d13fp")
+centered = false
+script = ExtResource("3_biepn")
+
+[node name="StartMarker" parent="." instance=ExtResource("4_uthkh")]
+position = Vector2(17, 51)
