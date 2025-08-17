@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Low rez game jam v3 fx 2025-08-16 0019.ogg-dc
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

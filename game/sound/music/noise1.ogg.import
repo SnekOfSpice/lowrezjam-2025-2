@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/noise1.ogg-9f4d493d163a3873c488e56ec2c46463.o
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

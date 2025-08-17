@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 # optional array of lines to show at the start of the level
 const LORE := {
 	"islamabad chand tara monument" : ["im surprised the lights work"],
@@ -17,6 +19,11 @@ const LORE := {
 
 ## used for dev purposes
 @export var skip_notifications := false
+@export_group("Story BGM progression")
+@export var fx_start_level : int
+@export var fx_end_level : int
+@export var noise_start_level : int
+@export var noise_end_level : int
 
 var level : String
 var level_counter := 0
@@ -46,19 +53,40 @@ func _ready() -> void:
 		GameMode.Mode.TimeAttack:
 			welcome_messages = ["time attack"]
 			level_counter = randi_range(0, GameMode.highest_unlocked_level)
+	set_background(level_counter)
 	notify(welcome_messages, 2, place_level.bind(level_counter))
 
+func set_background(index:int):
+	var level_name : String = GameMode.LEVELS[index]
+	$Background.texture = load("res://game/levels/%s/background.png" % level_name)
+	
+	var noise_tex_path := "res://game/levels/%s/noise.png" % level_name
+	if ResourceLoader.exists(noise_tex_path):
+		$NoiseLayer.visible = true
+		%NoiseTex.texture = load(noise_tex_path)
+	else:
+		$NoiseLayer.visible = false
+
 func place_level(number:int):
-	if number >= LEVELS.size():
-		push_warning("Tried starting level %s but we only have %s levels" % [number, LEVELS.size()])
+	if number >= GameMode.LEVELS.size():
+		push_warning("Tried starting level %s but we only have %s levels" % [number, GameMode.LEVELS.size()])
 		return
+	
+	if GameMode.mode == GameMode.Mode.Story:
+		var fx_ratio := float(number - fx_start_level + 1) / float(fx_end_level - fx_start_level + 1)
+		fx_ratio = clampf(fx_ratio, 0, 1)
+		Sound.set_fx_ratio(fx_ratio)
+		var noise_ratio := float(number - noise_start_level + 1) / float(noise_end_level - noise_start_level + 1)
+		noise_ratio = clampf(noise_ratio, 0, 1)
+		Sound.set_noise(noise_ratio)
+		Sound.set_muted(number >= GameMode.LEVELS.size() - 1)
 	
 	for child in %LevelContainer.get_children():
 		child.queue_free()
 	for child in %Paint.get_children():
 		child.queue_free()
 	
-	var level_name : String = LEVELS[number]
+	var level_name : String = GameMode.LEVELS[number]
 	var level_path := "res://game/levels/%s/%s.tscn" % [level_name, level_name]
 	var stencil : Stencil = load(level_path).instantiate()
 	%LevelContainer.add_child(stencil)
@@ -66,7 +94,7 @@ func place_level(number:int):
 	stencil.start_level.connect(on_stencil_start_level)
 	stencil.entered_pixel.connect(on_stencil_pixel_entered)
 	
-	$Background.texture = load("res://game/levels/%s/background.png" % level_name)
+	set_background(number)
 	
 	goal_pixels.clear()
 	pixel_tracker.clear()
@@ -219,7 +247,7 @@ func finish_level():
 func start_next_level():
 	if GameMode.mode == GameMode.Mode.Story:
 		level_counter += 1
-		if level_counter >= LEVELS.size():
+		if level_counter >= GameMode.LEVELS.size():
 			notify(
 				["perhaps I should leave this place too"
 				]

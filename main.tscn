@@ -1,17 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cc35ked1dq50k"]
+[gd_scene load_steps=9 format=3 uid="uid://cc35ked1dq50k"]
 
 [ext_resource type="Script" uid="uid://bwrth7h78aucm" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://b6t3ll4m4q4uk" path="res://game/src/stencil/stencils/track.gdshader" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://hipo1eavkdlk" path="res://game/levels/utah/background.png" id="2_1bvp3"]
 [ext_resource type="Theme" uid="uid://bghv3g1d34qho" path="res://game/visuals/theme.tres" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://c3sxophcbretl" path="res://game/levels/dak ya rice fields/noise.png" id="4_7mycd"]
 [ext_resource type="Shader" uid="uid://dgcq6pbm68730" path="res://bgnoise.gdshader" id="5_lquwl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 shader = ExtResource("5_lquwl")
-shader_parameter/intensity = 0.61
-shader_parameter/intensity_floor = 0.19
-shader_parameter/intensity_ceil = 0.72
-shader_parameter/pulse_speed = 6.91
+shader_parameter/disp_ = Vector2(0.5, 0.5)
+shader_parameter/speed = 3.0
+shader_parameter/color1 = Vector3(0.005, 0.045, 0.075)
+shader_parameter/color2 = Vector3(0.033, 0.07, 0.03)
+shader_parameter/m3 = Basis(0.65, 1.12, -1.43, -1.75, 0.65, -0.3, 0.3, 1.4, 1.22)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("2_0xm2m")
@@ -21,6 +23,10 @@ shader_parameter/angle = 0.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
+fx_start_level = 14
+fx_end_level = 16
+noise_start_level = 22
+noise_end_level = 23
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_1bvp3")
@@ -31,15 +37,16 @@ unique_name_in_owner = true
 position = Vector2(32, 32)
 
 [node name="NoiseLayer" type="CanvasLayer" parent="."]
-visible = false
 
-[node name="ColorRect" type="ColorRect" parent="NoiseLayer"]
+[node name="NoiseTex" type="TextureRect" parent="NoiseLayer"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_7mycd")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_7mycd")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 

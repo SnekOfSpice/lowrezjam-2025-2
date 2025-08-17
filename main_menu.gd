@@ -1,8 +1,10 @@
 extends Control
 
 func _ready() -> void:
+	# order matters
+	Sound.set_noise(0)
 	Sound.set_fx_ratio(0)
-	Sound.set_noise(false)
+	Sound.set_muted(false)
 	if GameMode.highest_unlocked_level == 0:
 		call_deferred("start_story_mode")
 	

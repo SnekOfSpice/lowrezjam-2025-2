@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 		if %ProgressBar.value == %ProgressBar.max_value and not called:
 			called = true
 			callable_target_on_selection.call(callable_on_selection)
+			Sound.play_sfx("success")
 
 func _on_mouse_entered() -> void:
 	is_mouse_in = true
