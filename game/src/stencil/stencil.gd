@@ -29,7 +29,6 @@ func _physics_process(_delta: float) -> void:
 	if last_pos != mouse_pos and not visited_pixels.has(mouse_pos):
 		emit_signal("entered_pixel", mouse_pos)
 		visited_pixels.append(mouse_pos)
-		#print("added" , mouse_pos)
 	
 	var dist = mouse_pos.distance_to(marker_pos)
 	if dist <= 1:
@@ -44,4 +43,3 @@ func _physics_process(_delta: float) -> void:
 		$StartMarker.modulate.a = 1
 	
 	last_pos = mouse_pos
-	#printt(mouse_pos, marker_pos, visited_pixels.size())

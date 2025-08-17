@@ -7,14 +7,14 @@ func _ready() -> void:
 	set_muted(false)
 
 func set_fx_ratio(ratio:float):
-	$BGMNoFX.volume_linear = 1.0 - ratio
-	$BGMFX.volume_linear = ratio
-	$Noise.volume_linear = 0
+	$BGMFX.set_volume_linear(ratio)
+	$BGMNoFX.set_volume_linear(clamp($BGMNoFX.volume_linear - ratio, 0, 1))
+	$Noise.set_volume_linear($Noise.volume_linear)
 
 func set_noise(ratio:float):
-	$BGMNoFX.volume_linear = 0
-	$BGMFX.volume_linear = 1.0 - ratio
-	$Noise.volume_linear = ratio
+	$BGMNoFX.set_volume_linear($BGMNoFX.volume_linear)
+	$BGMFX.set_volume_linear(clamp($BGMFX.volume_linear - ratio, 0, 1))
+	$Noise.set_volume_linear(ratio)
 
 func set_muted(muted:bool):
 	var music_bus_index := AudioServer.get_bus_index("Music")

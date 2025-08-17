@@ -11,11 +11,14 @@ script = ExtResource("1_fknwr")
 [node name="BGMNoFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_5tt2k")
 autoplay = true
+bus = &"Music"
 
 [node name="BGMFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_pic72")
 autoplay = true
+bus = &"Music"
 
 [node name="Noise" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_5tt2k")
 autoplay = true
+bus = &"Music"

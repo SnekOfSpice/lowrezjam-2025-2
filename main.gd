@@ -43,6 +43,9 @@ const TIME_PER_LEVEL := 15.0
 var time_left := TIME_PER_LEVEL
 
 func _ready() -> void:
+	Sound.set_noise(0)
+	Sound.set_fx_ratio(0)
+	Sound.set_muted(false)
 	%Notification.visible_characters = 0
 	%NotifBacking.modulate.a = 0 
 	%TimeAttackLabel.visible = GameMode.mode == GameMode.Mode.TimeAttack
@@ -61,7 +64,7 @@ func set_background(index:int):
 	$Background.texture = load("res://game/levels/%s/background.png" % level_name)
 	
 	var noise_tex_path := "res://game/levels/%s/noise.png" % level_name
-	if ResourceLoader.exists(noise_tex_path):
+	if ResourceLoader.exists(noise_tex_path) and GameMode.mode == GameMode.Mode.Story:
 		$NoiseLayer.visible = true
 		%NoiseTex.texture = load(noise_tex_path)
 	else:
@@ -72,6 +75,7 @@ func place_level(number:int):
 		push_warning("Tried starting level %s but we only have %s levels" % [number, GameMode.LEVELS.size()])
 		return
 	
+	level_time = 0
 	if GameMode.mode == GameMode.Mode.Story:
 		var fx_ratio := float(number - fx_start_level + 1) / float(fx_end_level - fx_start_level + 1)
 		fx_ratio = clampf(fx_ratio, 0, 1)
@@ -197,7 +201,7 @@ func finish_level():
 	Sound.play_sfx("horn")
 	
 	if GameMode.mode == GameMode.Mode.Story:
-		GameMode.highest_unlocked_level = max(level_counter, GameMode.highest_unlocked_level)
+		GameMode.set_highest_unlocked_level(max(level_counter, GameMode.highest_unlocked_level))
 	
 	# calculate results
 	var missed_pixels := []

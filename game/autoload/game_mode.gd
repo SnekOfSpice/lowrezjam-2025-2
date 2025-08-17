@@ -42,6 +42,7 @@ const SAVEGAME_PATH := "user://savegame.cfg"
 var highest_unlocked_level := 0
 
 func _ready() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	var config = ConfigFile.new()
 
 	var err = config.load(SAVEGAME_PATH)

@@ -32,10 +32,6 @@ noise_end_level = 23
 texture = ExtResource("2_1bvp3")
 centered = false
 
-[node name="LevelContainer" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(32, 32)
-
 [node name="NoiseLayer" type="CanvasLayer" parent="."]
 
 [node name="NoiseTex" type="TextureRect" parent="NoiseLayer"]
@@ -47,6 +43,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_7mycd")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="LevelContainer" type="Node2D" parent="CanvasLayer2"]
+unique_name_in_owner = true
+position = Vector2(32, 32)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
