@@ -11,7 +11,7 @@ shader_parameter/strength = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/angle = 0.0
 
-[node name="Where Has Everyone Gone" type="Sprite2D"]
+[node name="New Dehli" type="Sprite2D"]
 material = SubResource("ShaderMaterial_tfact")
 texture = ExtResource("2_qpqq1")
 centered = false
